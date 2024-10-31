@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chi Mei Medical Center - Digital Home Care Nurse</title>
+<style>
+  /* Centered text styling */
+  #main-title {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2.5em;
+    color: #FF69B4; /* Pink color */
+  }
+
+  /* Background styling */
+  body {
+    background-image: url('https://example.com/home_nursing_background.jpg'); /* Replace with actual image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Chat bubble styling */
+  #heygen-streaming-embed {
+    z-index: 9999;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);
+    transition: all linear 0.1s;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+  }
+  #heygen-streaming-embed.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  #heygen-streaming-embed.expand {
+    height: 366px;
+    width: calc(366px * 16 / 9);
+    border: 0;
+    border-radius: 8px;
+  }
+  #heygen-streaming-container {
+    width: 100%;
+    height: 100%;
+  }
+  #heygen-streaming-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- Main Title -->
+<div id="main-title">奇美醫院數位居家護理師</div>
+
+<!-- Chat bubble script -->
+<script>
+  !function(window) {
+    const host = "https://labs.heygen.com";
+    const url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiIwNjg3MzIxMTFjNjU0M2U5YTA5ZTY0M2Rj%0D%0AN2VmNDQyZCIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0D%0ALzA2ODczMjExMWM2NTQzZTlhMDllNjQzZGM3ZWY0NDJkL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0%0D%0ALndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6Ijk0%0D%0ANDM4ZjliMDQ3MzQ1Mzk4YjUyZDYwNzdjYzlhYTZmIiwidXNlcm5hbWUiOiIxN2I3ZTI2MTlkMTA0%0D%0AOTFhOTllY2NkMDBiOWY4MzAyZiJ9&inIFrame=1";
+    const wrapDiv = document.createElement("div");
+    wrapDiv.id = "heygen-streaming-embed";
+    const container = document.createElement("div");
+    container.id = "heygen-streaming-container";
+    const iframe = document.createElement("iframe");
+    iframe.allowFullscreen = false;
+    iframe.title = "Streaming Embed";
+    iframe.role = "dialog";
+    iframe.allow = "microphone";
+    iframe.src = url;
+    
+    window.addEventListener("message", (e) => {
+      if (e.origin === host && e.data && e.data.type === "streaming-embed") {
+        if (e.data.action === "init") {
+          wrapDiv.classList.add("show");
+        } else if (e.data.action === "show") {
+          wrapDiv.classList.add("expand");
+        } else if (e.data.action === "hide") {
+          wrapDiv.classList.remove("expand");
+        }
+      }
+    });
+    
+    container.appendChild(iframe);
+    wrapDiv.appendChild(container);
+    document.body.appendChild(wrapDiv);
+  }(globalThis);
+</script>
+
+</body>
+</html>
